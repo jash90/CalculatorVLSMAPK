@@ -30,34 +30,20 @@ public class RowAdapter extends ArrayAdapter<Integer> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        RowBeanHolder holder = null;
-
-        if(row == null)
-        {
-            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-            row = inflater.inflate(layoutResourceId, parent, false);
-
-            holder = new RowBeanHolder();
-            holder.iloscHostow = (EditText) row.findViewById(R.id.iloscHostow);
-            holder.numerPodsieci = (TextView)row.findViewById(R.id.numerPodsieci);
-
-            row.setTag(holder);
-        }
-        else
-        {
-            holder = (RowBeanHolder)row.getTag();
-        }
         Integer i  = data.get(position);
-        holder.numerPodsieci.setText("Podsieć "+(position+1)+" : ");
+
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.layout_item, null);
+
+        EditText iloscHostow = (EditText) view.findViewById(R.id.iloscHostow);
+        TextView numerPodsieci = (TextView)view.findViewById(R.id.numerPodsieci);
 
 
-        return row;
+        numerPodsieci.setText("Podsieć "+(position+1)+" : ");
+
+
+        return view;
     }
 
-    static class RowBeanHolder
-    {
-        TextView numerPodsieci;
-        EditText iloscHostow;
-    }
+
 }
