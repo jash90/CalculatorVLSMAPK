@@ -1,18 +1,22 @@
 package com.example.zimny.calculatorvlsm;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView listView;
+    LinearLayout linearLayout;
     EditText et1,et2,et3,et4,et5,et6;
     TextView tv;
     ArrayList<Integer> hostow;
@@ -20,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listView = (ListView) findViewById(R.id.listView);
+        linearLayout= (LinearLayout) findViewById(R.id.linearlayout);
         tv = (TextView) findViewById(R.id.Wynik);
         et1 = (EditText) findViewById(R.id.oktet1);
         et2 = (EditText) findViewById(R.id.oktet2);
@@ -29,16 +33,25 @@ public class MainActivity extends AppCompatActivity {
         et5 = (EditText) findViewById(R.id.maska);
         et6 = (EditText) findViewById(R.id.iloscPodsieci);
         hostow = new ArrayList<>();
-        RowAdapter adapter = new RowAdapter(this,R.layout.layout_item, hostow);
-        listView.setAdapter(adapter);
+
     }
 
     public void Ustal(View view) {
-        hostow.clear();
-        int i = Integer.valueOf(et6.getText().toString());
-        for (int x=0;x<i;x++)
+        try {
+            int i = Integer.valueOf(et6.getText().toString());
+            linearLayout.removeAllViews();
+            for (int x = 0; x < i; x++) {
+                EditText editText = new EditText(getApplicationContext());
+                editText.setHint("Podsieć " + (x + 1));
+                editText.setVisibility(View.VISIBLE);
+                editText.setLayoutParams(new ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                linearLayout.addView(editText);
+            }
+            linearLayout.refreshDrawableState();
+        }
+        catch (Exception ex)
         {
-            hostow.add(0);
+            Toast.makeText(this,ex.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
         }
     }
 
