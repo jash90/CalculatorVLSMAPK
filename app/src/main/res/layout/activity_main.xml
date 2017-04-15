@@ -40,7 +40,8 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
             android:hint="192"
-            android:inputType="number" />
+            android:inputType="number"
+            />
 
         <EditText
             android:id="@+id/oktet2"
@@ -160,13 +161,18 @@
         </LinearLayout>
 
     </ScrollView>
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <TextView
         android:id="@+id/Wynik"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="top|center_vertical"
+        android:gravity="center_horizontal|center_vertical"
         android:text=""
+        android:textSize="15dp"
+        android:layout_margin="10dp"
         />
+    </ScrollView>
 
 </LinearLayout>
